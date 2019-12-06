@@ -95,4 +95,20 @@ class AbsencesController extends Controller
     {
         //
     }
+
+    public function accept(Absence $absence)
+    {
+        $absence->status = 'accepted';
+        $absence->save();
+        session()->flash('success', 'Accepted successfully.');
+        return redirect(route('absences.index'));
+    }
+
+    public function reject(Absence $absence)
+    {
+        $absence->status = 'rejected';
+        $absence->save();
+        session()->flash('success', 'Reject successfully.');
+        return redirect(route('absences.index'));
+    }
 }

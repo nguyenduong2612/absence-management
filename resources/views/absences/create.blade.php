@@ -15,14 +15,16 @@
             <textarea name="reason" id="reason" cols="5" rows="5" class="form-control"></textarea>
         </div>
 
-        <div class="form-group">
-            <label for="start_at">Start At</label>
-            <input type="text" class="form-control" name="start_at" id='start_at'>
-        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="start_at">Start At</label>
+                <input type="text" class="form-control" name="start_at" id='start_at'>
+            </div>
 
-        <div class="form-group">
-            <label for="end_at">End At</label>
-            <input type="text" class="form-control" name="end_at" id='end_at'>
+            <div class="form-group col-md-6">
+                <label for="end_at">End At</label>
+                <input type="text" class="form-control" name="end_at" id='end_at'>
+            </div>
         </div>
 
         <input type="hidden" class="form-control" name="user_id" id="user_id" value="{{ Auth::user()->id }}">

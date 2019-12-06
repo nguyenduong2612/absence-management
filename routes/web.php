@@ -17,6 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'AbsencesController@index')->name('home');
 
 Route::resource('absences', 'AbsencesController');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::post('absences/{absence}/accept', 'AbsencesController@accept')->name('absences.accept');
+    Route::post('absences/{absence}/reject', 'AbsencesController@reject')->name('absences.reject');
+});
