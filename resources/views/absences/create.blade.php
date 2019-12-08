@@ -3,7 +3,7 @@
 @section('content')
 <div class="card card-default">
     <div class="card-header">
-        Tạo đơn xin nghỉ phép
+        <h2 class="mt-2">Tạo đơn xin nghỉ phép</h2>
     </div>
 
     <div class="card-body">
@@ -17,12 +17,12 @@
 
         <div class="row">
             <div class="form-group col-md-6">
-                <label for="start_at">Bắt đầu</label>
+                <label for="start_at">Thời gian bắt đầu</label>
                 <input type="text" class="form-control" name="start_at" id='start_at'>
             </div>
 
             <div class="form-group col-md-6">
-                <label for="end_at">Kết thúc</label>
+                <label for="end_at">Thời gian kết thúc</label>
                 <input type="text" class="form-control" name="end_at" id='end_at'>
             </div>
         </div>

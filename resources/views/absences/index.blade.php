@@ -24,55 +24,83 @@
                 @endif  
             </thead>
             <tbody>
-                @foreach($absences as $absence)
-                <tr>
-                    <td>
-                        {{ \App\User::where(['id' => $absence->user_id])->first()->name }}
-                    </td>
-                    <td>
-                        {{ $absence->reason }}
-                    </td>
-                    <td>
-                        {{ $absence->start_at }} <br> {{ $absence->end_at }}
-                    </td>
-                    <td>
-                        {{ $absence->created_at }}
-                    </td>
-                    <td>
-                        @if( $absence->status == 'pending' ) 
-                            <div class="pending px-3 py-1">Đang chờ</div>
-                        @elseif( $absence->status == 'accepted' ) 
-                            <div class="accepted px-3 py-1">Đã duyệt</div>
-                        @else
-                            <div class="rejected px-3 py-1">Từ chối</div>
-                        @endif
-                    </td>
-                    @if(auth()->user()->isAdmin())
+                @if(auth()->user()->isAdmin())
+                    @foreach($absences as $absence)
+                    <tr>
+                        <td>
+                            {{ \App\User::where(['id' => $absence->user_id])->first()->name }}
+                        </td>
+                        <td>
+                            {{ $absence->reason }}
+                        </td>
+                        <td>
+                            {{ $absence->start_at }} <br> {{ $absence->end_at }}
+                        </td>
+                        <td>
+                            {{ $absence->created_at }}
+                        </td>
+                        <td>
+                            @if( $absence->status == 'pending' ) 
+                                <div class="pending px-3 py-1">Đang chờ</div>
+                            @elseif( $absence->status == 'accepted' ) 
+                                <div class="accepted px-3 py-1">Đã duyệt</div>
+                            @else
+                                <div class="rejected px-3 py-1">Từ chối</div>
+                            @endif
+                        </td>
                         @if( $absence->status == 'pending') 
-                        <td>
-                            <form action="{{ route('absences.accept', $absence->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-success btn-sm">Đồng ý</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{{ route('absences.reject', $absence->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-danger btn-sm">Từ chối</button>
-                            </form>
-                        </td>
+                            <td>
+                                <form action="{{ route('absences.accept', $absence->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success btn-sm">Đồng ý</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="{{ route('absences.reject', $absence->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-sm">Từ chối</button>
+                                </form>
+                            </td>
                         @else
-                        <td>
-                            <form action="{{ route('absences.undo', $absence->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-primary btn-sm">Hoàn tác</button>
-                            </form>
-                        </td>
-                        <td></td>
+                            <td>
+                                <form action="{{ route('absences.undo', $absence->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary btn-sm">Hoàn tác</button>
+                                </form>
+                            </td>
+                            <td></td>
                         @endif
-                    @endif  
-                </tr>
-                @endforeach
+                    </tr>
+                    @endforeach
+                @else
+                    @foreach($absences as $absence)
+                        @if(Auth::user()->id == $absence->user_id)
+                        <tr>
+                            <td>
+                                {{ \App\User::where(['id' => $absence->user_id])->first()->name }}
+                            </td>
+                            <td>
+                                {{ $absence->reason }}
+                            </td>
+                            <td>
+                                {{ $absence->start_at }} <br> {{ $absence->end_at }}
+                            </td>
+                            <td>
+                                {{ $absence->created_at }}
+                            </td>
+                            <td>
+                                @if( $absence->status == 'pending' ) 
+                                    <div class="pending px-3 py-1">Đang chờ</div>
+                                @elseif( $absence->status == 'accepted' ) 
+                                    <div class="accepted px-3 py-1">Đã duyệt</div>
+                                @else
+                                    <div class="rejected px-3 py-1">Từ chối</div>
+                                @endif
+                            </td>
+                        </tr>
+                        @endif
+                    @endforeach
+                @endif
             </tbody>
         </table>
         {{ $absences->links() }}
