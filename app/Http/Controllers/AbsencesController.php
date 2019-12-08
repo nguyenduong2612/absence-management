@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Absence;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\Paginator;
+use Pusher\Pusher;
 use App\Http\Requests\Absences\CreateAbsencesRequest;
 
 class AbsencesController extends Controller
@@ -103,6 +103,24 @@ class AbsencesController extends Controller
     {
         $absence->status = 'accepted';
         $absence->save();
+
+        $data['title'] = 'Cập nhật trạng thái';
+        $data['content'] = 'Đơn xin nghỉ của bạn đã được chấp nhận.';
+
+        $options = array(
+            'cluster' => 'ap1',
+            'encrypted' => true
+        );
+
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
+
+        $pusher->trigger('Notify', 'send-message', $data);
+
         session()->flash('success', 'Đã chấp nhận đơn xin nghỉ.');
         return redirect(route('absences.index'));
     }
@@ -111,6 +129,24 @@ class AbsencesController extends Controller
     {
         $absence->status = 'rejected';
         $absence->save();
+
+        $data['title'] = 'Cập nhật trạng thái';
+        $data['content'] = 'Đơn xin nghỉ của bạn đã bị từ chối.';
+
+        $options = array(
+            'cluster' => 'ap1',
+            'encrypted' => true
+        );
+
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
+
+        $pusher->trigger('Notify', 'send-message', $data);
+
         session()->flash('success', 'Đã từ chối đơn xin nghỉ.');
         return redirect(route('absences.index'));
     }
