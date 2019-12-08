@@ -81,68 +81,72 @@
                 @endif
                 @yield('content')
             </div>
-            @if(!auth()->user()->isAdmin())
-                <div class="noti-container">
-                </div>
-                <button class="click" onclick="handle()" hidden></button>
-            @endif
+            @auth
+                @if(!auth()->user()->isAdmin())
+                    <div class="noti-container">
+                    </div>
+                    <button class="click" onclick="handle()" hidden></button>
+                @endif
+            @endauth
         </main>
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" ></script>
     <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
-    @if(!auth()->user()->isAdmin())
-    <script type="text/javascript">
-       
-        var notifications = $('#app').find('div.noti-container');
-        var button = $(".click");
+    @auth
+        @if(!auth()->user()->isAdmin())
+        <script type="text/javascript">
+        
+            var notifications = $('#app').find('div.noti-container');
+            var button = $(".click");
 
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true;
 
-        var pusher = new Pusher('{{env('PUSHER_APP_KEY')}}', {
-            cluster: 'ap1',
-            encrypted: true
-        });
+            var pusher = new Pusher('{{env('PUSHER_APP_KEY')}}', {
+                cluster: 'ap1',
+                encrypted: true
+            });
 
-        // Subscribe to the channel we specified in our Laravel Event
-        var channel = pusher.subscribe('Notify');
+            // Subscribe to the channel we specified in our Laravel Event
+            var channel = pusher.subscribe('Notify');
 
-        // Bind a function to a Event (the full Laravel class)
-        channel.bind('send-message', function(data) {
-            var newNotificationHtml = `
-            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="deleteModalLabel">`+data.title+`</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <h5 class="text-center text-bold mt-3 mb-4">
-                            `+data.content+`
-                            </h5>
-                            <p class="text-center text-bold">
-                            Nhấn F5 để cập nhật lại trạng thái
-                            </>
+            // Bind a function to a Event (the full Laravel class)
+            channel.bind('send-message', function(data) {
+                var newNotificationHtml = `
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="deleteModalLabel">`+data.title+`</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h5 class="text-center text-bold mt-3 mb-4">
+                                `+data.content+`
+                                </h5>
+                                <p class="text-center text-bold">
+                                Nhấn F5 để cập nhật lại trạng thái
+                                </>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            `;
+                `;
 
-            notifications.html(newNotificationHtml);
-            button.click();
-        });
+                notifications.html(newNotificationHtml);
+                button.click();
+            });
 
-        function handle() {
-            $('#deleteModal').modal('show')
-        }
-    </script>
-    @endif
+            function handle() {
+                $('#deleteModal').modal('show')
+            }
+        </script>
+        @endif
+    @endauth
     @yield('scripts')
 </body>
 </html>
