@@ -1,0 +1,23 @@
+.accepted {
+    border: 2px solid #38c172;
+    border-radius: 4px;
+    color: #38c172;
+    font-weight: bold;
+    text-align: center;
+}
+
+.rejected {
+    border: 2px solid #e3342f;
+    border-radius: 4px;
+    color: #e3342f;
+    font-weight: bold;
+    text-align: center;
+}
+
+.pending {
+    border: 2px solid #efae4e;
+    border-radius: 4px;
+    color: #efae4e;
+    font-weight: bold;
+    text-align: center;
+}

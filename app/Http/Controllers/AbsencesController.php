@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Absence;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use App\Http\Requests\Absences\CreateAbsencesRequest;
 
 class AbsencesController extends Controller
@@ -15,7 +16,9 @@ class AbsencesController extends Controller
      */
     public function index()
     {
-        return view('absences.index')->with('absences', Absence::all());
+        $absences = Absence::orderBy('created_at', 'desc')->paginate(10);
+
+        return view('absences.index')->with('absences', $absences);
     }
 
     /**
@@ -45,7 +48,7 @@ class AbsencesController extends Controller
         ]);
 
         // flash message
-        session()->flash('success', 'Request created successfully.');
+        session()->flash('success', 'Đơn của bạn đã được tạo. Vui lòng chờ quản trị viên phê duyệt.');
 
         // redirect user
         return redirect(route('absences.index'));
@@ -100,7 +103,7 @@ class AbsencesController extends Controller
     {
         $absence->status = 'accepted';
         $absence->save();
-        session()->flash('success', 'Accepted successfully.');
+        session()->flash('success', 'Đã chấp nhận đơn xin nghỉ.');
         return redirect(route('absences.index'));
     }
 
@@ -108,7 +111,15 @@ class AbsencesController extends Controller
     {
         $absence->status = 'rejected';
         $absence->save();
-        session()->flash('success', 'Reject successfully.');
+        session()->flash('success', 'Đã từ chối đơn xin nghỉ.');
+        return redirect(route('absences.index'));
+    }
+
+    public function undo(Absence $absence)
+    {
+        $absence->status = 'pending';
+        $absence->save();
+        session()->flash('success', 'Hoàn tác thành công.');
         return redirect(route('absences.index'));
     }
 }

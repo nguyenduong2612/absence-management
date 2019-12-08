@@ -3,7 +3,7 @@
 @section('content')
 <div class="card card-default">
     <div class="card-header">
-        Create New Request
+        Tạo đơn xin nghỉ phép
     </div>
 
     <div class="card-body">
@@ -11,18 +11,18 @@
         @csrf
 
         <div class="form-group">
-            <label for="reason">Reason</label>
+            <label for="reason">Lý do xin nghỉ phép</label>
             <textarea name="reason" id="reason" cols="5" rows="5" class="form-control"></textarea>
         </div>
 
         <div class="row">
             <div class="form-group col-md-6">
-                <label for="start_at">Start At</label>
+                <label for="start_at">Bắt đầu</label>
                 <input type="text" class="form-control" name="start_at" id='start_at'>
             </div>
 
             <div class="form-group col-md-6">
-                <label for="end_at">End At</label>
+                <label for="end_at">Kết thúc</label>
                 <input type="text" class="form-control" name="end_at" id='end_at'>
             </div>
         </div>
@@ -31,7 +31,7 @@
 
         <div class="form-group">
             <button type="submit" class="btn btn-success">
-                Create New Request
+                Tạo đơn 
             </button>
         </div>
         </form>

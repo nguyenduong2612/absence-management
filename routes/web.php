@@ -24,4 +24,5 @@ Route::resource('absences', 'AbsencesController');
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('absences/{absence}/accept', 'AbsencesController@accept')->name('absences.accept');
     Route::post('absences/{absence}/reject', 'AbsencesController@reject')->name('absences.reject');
+    Route::post('absences/{absence}/undo', 'AbsencesController@undo')->name('absences.undo');
 });
