@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@auth
 <div class="d-flex justify-content-end mb-2">
     @if(!auth()->user()->isAdmin())
         <a href="{{ route('absences.create') }}" class="btn btn-success">Tạo đơn xin nghỉ phép</a>
@@ -106,4 +107,5 @@
         {{ $absences->links() }}
     </div>
 </div>
+@endauth
 @endsection
