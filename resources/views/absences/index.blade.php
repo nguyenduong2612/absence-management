@@ -35,10 +35,10 @@
                             {{ $absence->reason }}
                         </td>
                         <td>
-                            {{ $absence->start_at }} <br> {{ $absence->end_at }}
+                            Từ {{ Carbon\Carbon::parse($absence->start_at)->format('d/m/Y') }} <br> Đến {{ Carbon\Carbon::parse($absence->end_at)->format('d/m/Y') }}
                         </td>
                         <td>
-                            {{ $absence->created_at }}
+                            {{ Carbon\Carbon::parse($absence->created_at)->setTimezone('Asia/Ho_Chi_Minh')->format('H:i:s d/m/Y') }}
                         </td>
                         <td>
                             @if( $absence->status == 'pending' ) 
@@ -84,10 +84,10 @@
                                 {{ $absence->reason }}
                             </td>
                             <td>
-                                {{ $absence->start_at }} <br> {{ $absence->end_at }}
+                                Từ {{ Carbon\Carbon::parse($absence->start_at)->format('d/m/Y') }} <br> Đến {{ Carbon\Carbon::parse($absence->end_at)->format('d/m/Y') }}
                             </td>
                             <td>
-                                {{ $absence->created_at }}
+                                {{ Carbon\Carbon::parse($absence->created_at)->setTimezone('Asia/Ho_Chi_Minh')->format('H:i:s d/m/Y') }}
                             </td>
                             <td>
                                 @if( $absence->status == 'pending' ) 
