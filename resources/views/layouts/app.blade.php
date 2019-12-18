@@ -130,9 +130,12 @@
                                 <h5 class="text-center text-bold mt-3 mb-4">
                                 `+data.content+`
                                 </h5>
+                                <h5 class="text-left text-bold mx-4 mb-4" style="word-break: break-all">
+                                Lời nhắn của QTV: `+data.description+`
+                                </h5>
                                 <p class="text-center text-bold">
                                 Nhấn F5 để cập nhật lại trạng thái
-                                </>
+                                </p>
                             </div>
                         </div>
                     </div>

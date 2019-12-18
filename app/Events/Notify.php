@@ -16,7 +16,9 @@ class Notify
 
     public $title;
 
-    public $message;
+    public $content;
+
+    public $description;
     /**
      * Create a new event instance.
      *
@@ -25,7 +27,8 @@ class Notify
     public function __construct($data)
     {
         $this->title = $data['title'];
-        $this->message  = $data['content'];
+        $this->content  = $data['content'];
+        $this->description  = $data['description'];
     }
 
     /**

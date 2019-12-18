@@ -51,16 +51,61 @@
                         </td>
                         @if( $absence->status == 'pending') 
                             <td>
-                                <form action="{{ route('absences.accept', $absence->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-success btn-sm">Đồng ý</button>
-                                </form>
+                                <button onclick="showAcceptModal({{$absence->id}})" class="btn btn-success btn-sm">Đồng ý</button>
+                        
+                                <div class="modal fade" id="accept{{$absence->id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <form action="{{ route('absences.accept', $absence->id) }}" method="POST" >
+                                            @csrf
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="deleteModalLabel">Chấp nhận đơn xin nghỉ</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="description">Nội dung</label>
+                                                        <input type="text" id="description" class="form-control" name="description" >
+                                                    </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
+                                                    <button type="submit" class="btn btn-success">Đồng ý</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
                             </td>
                             <td>
-                                <form action="{{ route('absences.reject', $absence->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger btn-sm">Từ chối</button>
-                                </form>
+                                <button onclick="showRejectModal({{$absence->id}})" class="btn btn-danger btn-sm">Từ chối</button>
+
+                                <div class="modal fade" id="reject{{$absence->id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <form action="{{ route('absences.reject', $absence->id) }}" method="POST" >
+                                            @csrf
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="deleteModalLabel">Từ chối đơn xin nghỉ</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="description">Nội dung</label>
+                                                        <input type="text" id="description" class="form-control" name="description" >
+                                                    </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
+                                                    <button type="submit" class="btn btn-danger">Từ chối</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </td>
                         @else
                             <td>
@@ -108,4 +153,17 @@
     </div>
 </div>
 @endauth
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+    function showAcceptModal(id) {
+        var id = '#accept' + id.toString();
+        $(id).modal('show')
+    }
+    function showRejectModal(id) {
+        var id = '#reject' + id.toString();
+        $(id).modal('show')
+    }
+</script>
 @endsection

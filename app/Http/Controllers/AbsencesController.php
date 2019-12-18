@@ -99,13 +99,18 @@ class AbsencesController extends Controller
         //
     }
 
-    public function accept(Absence $absence)
+    public function accept(Request $request, Absence $absence)
     {
+        $request->validate([
+            'description' => 'required',
+        ]);
+
         $absence->status = 'accepted';
         $absence->save();
 
         $data['title'] = 'Cập nhật trạng thái';
         $data['content'] = 'Đơn xin nghỉ của bạn đã được chấp nhận.';
+        $data['description'] = $request->description;
 
         $options = array(
             'cluster' => 'ap1',
@@ -125,13 +130,18 @@ class AbsencesController extends Controller
         return redirect(route('absences.index'));
     }
 
-    public function reject(Absence $absence)
+    public function reject(Request $request, Absence $absence)
     {
+        $request->validate([
+            'description' => 'required',
+        ]);
+
         $absence->status = 'rejected';
         $absence->save();
 
         $data['title'] = 'Cập nhật trạng thái';
         $data['content'] = 'Đơn xin nghỉ của bạn đã bị từ chối.';
+        $data['description'] = $request->description;
 
         $options = array(
             'cluster' => 'ap1',
