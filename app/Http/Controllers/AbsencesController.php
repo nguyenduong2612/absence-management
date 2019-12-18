@@ -113,9 +113,9 @@ class AbsencesController extends Controller
         );
 
         $pusher = new Pusher(
-            env('PUSHER_APP_KEY'),
-            env('PUSHER_APP_SECRET'),
-            env('PUSHER_APP_ID'),
+            '2fdd4bc794d49256edb0',
+            'c72bac4a2f44e76d5af4',
+            '914360',
             $options
         );
 
@@ -139,9 +139,9 @@ class AbsencesController extends Controller
         );
 
         $pusher = new Pusher(
-            env('PUSHER_APP_KEY'),
-            env('PUSHER_APP_SECRET'),
-            env('PUSHER_APP_ID'),
+            '2fdd4bc794d49256edb0',
+            'c72bac4a2f44e76d5af4',
+            '914360',
             $options
         );
 

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Validator, Redirect, Response, File;
+use Socialite;
 
 class UsersController extends Controller
 {
@@ -97,5 +100,33 @@ class UsersController extends Controller
         $user->save();
         session()->flash('success', 'Đã gỡ tư cách quản trị viên của '.$user->name.'.');
         return redirect(route('users.index'));
+    }
+
+    public function redirect($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    public function callback($provider)
+    {
+        $getInfo = Socialite::driver($provider)->user();
+        $user = $this->createUser($getInfo, $provider);
+        auth()->login($user);
+        return redirect()->to('/home');
+    }
+
+    function createUser($getInfo, $provider)
+    {
+        $user = User::where('provider_id', $getInfo->id)->first();
+        if (!$user) {
+            $user = User::create([
+                'name' => $getInfo->name,
+                'email' => $getInfo->email,
+                'password' => Hash::make('password'),
+                'provider' => $provider,
+                'provider_id' => $getInfo->id
+            ]);
+        }
+        return $user;
     }
 }

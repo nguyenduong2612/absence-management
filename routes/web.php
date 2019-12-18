@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'AbsencesController@index')->name('home');
+Route::get('/auth/redirect/{provider}', 'UsersController@redirect');
+Route::get('/callback/{provider}', 'UsersController@callback');
 
 Route::resource('absences', 'AbsencesController');
 

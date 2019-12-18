@@ -13,6 +13,11 @@ return [
     | to have a conventional place to find your various credentials.
     |
     */
+    'facebook' => [
+        'client_id' => '2587625114847868',
+        'client_secret' => 'f0444c0a9df1664a345b6099b5daa220',
+        'redirect' => 'https://absence-management.herokuapp.com/callback/facebook',
+    ],
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
