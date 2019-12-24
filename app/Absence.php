@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Absence extends Model
 {
     protected $fillable = [
-        'user_id', 'reason', 'start_at', 'end_at'
+        'user_id', 'reason', 'start_at', 'end_at', 'note'
     ];
 
     public function isPending()

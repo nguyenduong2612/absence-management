@@ -44,7 +44,8 @@ class AbsencesController extends Controller
             'user_id' => $request->user_id,
             'reason' => $request->reason,
             'start_at' => $request->start_at,
-            'end_at' => $request->end_at
+            'end_at' => $request->end_at,
+            'note' => $request->note
         ]);
 
 
@@ -103,8 +104,9 @@ class AbsencesController extends Controller
     public function accept(Request $request, Absence $absence)
     {
         $request->validate([
-            'description' => 'required',
+            'description' => 'nullable',
         ]);
+        if ($request->description == NULL) $request->description = '';
 
         $absence->status = 'accepted';
         $absence->save();
@@ -134,8 +136,9 @@ class AbsencesController extends Controller
     public function reject(Request $request, Absence $absence)
     {
         $request->validate([
-            'description' => 'required',
+            'description' => 'nullable',
         ]);
+        if ($request->description == NULL) $request->description = '';
 
         $absence->status = 'rejected';
         $absence->save();
@@ -179,15 +182,30 @@ class AbsencesController extends Controller
         {
             if ($absence->status == 'accepted') {
                 $events[] = \Calendar::event(
-                    \App\User::where(['id' => $absence->user_id])->first()->name.' - '.$absence->reason,
+                    \App\User::where(['id' => $absence->user_id])->first()->name.': '.$absence->reason,
                     true,
                     new \DateTime($absence->start_at),
-                    new \DateTime($absence->end_at.' +1 day')
+                    new \DateTime($absence->end_at.' +1 day'),
+                    $absence->id,
+                    [
+                        'color' => '#800',
+                        'description' => '<div id="'.$absence->id.'" class="notes" style="display: none">Ghi chú: '.$absence->note.'</div>',
+                    ]
                 );
             }
         }
        
-        $calendar = \Calendar::addEvents($events);
+        $calendar = \Calendar::addEvents($events)->setCallbacks([
+            'eventRender' => 'function(event, element) { 
+                element.children().last().append(event.description);
+            }',
+            'eventMouseover' => 'function(event) { 
+                $("#"+event.id).show();
+            }',
+            'eventMouseout' => 'function(event) { 
+                $("#"+event.id).hide();
+            }'
+            ]);
 
         return view('absences.calender', compact('calendar'));
     }

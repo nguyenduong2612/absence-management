@@ -17,21 +17,24 @@ class AbsencesTableSeeder extends Seeder
             'reason' => 'Bị ốm',
             'start_at' => '2019-12-05 12:00:00',
             'end_at' => '2019-12-06 18:00:00',
-            'status' => 'accepted'
+            'status' => 'accepted',
+            'note' => 'Nghỉ không lương'
         ]);
         Absence::create([
             'user_id' => '3',
             'reason' => 'Vẫn bị ốm chưa khỏi',
             'start_at' => '2019-12-07 08:00:00',
             'end_at' => '2019-12-13 08:00:00',
-            'status' => 'rejected'
+            'status' => 'rejected',
+            'note' => 'Nghỉ không lương'
         ]);
         Absence::create([
             'user_id' => '2',
             'reason' => 'Nghỉ 1 ngày về thăm nhà',
             'start_at' => '2019-12-10 08:00:00',
             'end_at' => '2019-12-11 08:00:00',
-            'status' => 'accepted'
+            'status' => 'accepted',
+            'note' => 'Nghỉ phép'
         ]);
         Absence::create([
             'user_id' => '5',
@@ -52,21 +55,24 @@ class AbsencesTableSeeder extends Seeder
             'reason' => 'Nghỉ 1 ngày về quê',
             'start_at' => '2019-12-26 08:00:00',
             'end_at' => '2019-12-27 08:00:00',
-            'status' => 'accepted'
+            'status' => 'accepted',
+            'note' => 'Nghỉ phép'
         ]);
         Absence::create([
             'user_id' => '5',
             'reason' => 'Nghỉ đi du lịch với gia đình',
             'start_at' => '2019-12-20 08:00:00',
             'end_at' => '2019-12-27 08:00:00',
-            'status' => 'rejected'
+            'status' => 'rejected',
+            'note' => 'Nghỉ có lương'
         ]);
         Absence::create([
             'user_id' => '4',
             'reason' => 'Nghỉ chăm con bị ốm',
             'start_at' => '2019-12-31 08:00:00',
             'end_at' => '2019-12-31 18:00:00',
-            'status' => 'pending'
+            'status' => 'pending',
+            'note' => 'Đột xuất'
         ]);
     }
 }

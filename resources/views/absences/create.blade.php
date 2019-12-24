@@ -27,6 +27,11 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label for="note">Ghi chú</label>
+            <input type="text" class="form-control" name="note" id='note'>
+        </div>
+
         <input type="hidden" class="form-control" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
 
         <div class="form-group">

@@ -26,7 +26,8 @@ class CreateAbsencesRequest extends FormRequest
             'user_id' => 'required',
             'reason' => 'required',
             'start_at' => 'required',
-            'end_at' => 'required'
+            'end_at' => 'required',
+            'note' => 'nullable'
         ];
     }
 }

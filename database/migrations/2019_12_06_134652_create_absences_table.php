@@ -19,6 +19,7 @@ class CreateAbsencesTable extends Migration
             $table->text('reason');
             $table->timestamp('start_at')->nullable();
             $table->timestamp('end_at')->nullable();
+            $table->string('note')->nullable();
             $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->timestamps();
         });
