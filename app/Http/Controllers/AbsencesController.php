@@ -47,6 +47,7 @@ class AbsencesController extends Controller
             'end_at' => $request->end_at
         ]);
 
+
         // flash message
         session()->flash('success', 'Đơn của bạn đã được tạo. Vui lòng chờ quản trị viên phê duyệt.');
 
@@ -167,5 +168,27 @@ class AbsencesController extends Controller
         $absence->save();
         session()->flash('success', 'Hoàn tác thành công.');
         return redirect(route('absences.index'));
+    }
+
+    public function calender()
+    {
+        $absences = Absence::get();
+
+        $events = [];
+        foreach($absences as $key => $absence)
+        {
+            if ($absence->status == 'accepted') {
+                $events[] = \Calendar::event(
+                    \App\User::where(['id' => $absence->user_id])->first()->name.' - '.$absence->reason,
+                    true,
+                    new \DateTime($absence->start_at),
+                    new \DateTime($absence->end_at.' +1 day')
+                );
+            }
+        }
+       
+        $calendar = \Calendar::addEvents($events);
+
+        return view('absences.calender', compact('calendar'));
     }
 }

@@ -3,9 +3,10 @@
 @section('content')
 @auth
 <div class="d-flex justify-content-end mb-2">
-    @if(!auth()->user()->isAdmin())
-        <a href="{{ route('absences.create') }}" class="btn btn-success">Tạo đơn xin nghỉ phép</a>
+    @if(auth()->user()->isAdmin())
+        <a href="{{ url('calender') }}" class="btn btn-success">Quản lý nghỉ phép</a>
     @endif
+    <a href="{{ route('absences.create') }}" class="btn btn-success ml-3">Tạo đơn xin nghỉ phép</a>
 </div>
 
 <div class="card card-default">
