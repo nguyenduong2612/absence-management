@@ -69,6 +69,7 @@
                                                     <div class="form-group">
                                                         <label for="description">Nội dung</label>
                                                         <input type="text" id="description" class="form-control" name="description" >
+                                                        <input type="hidden" class="form-control" name="user_id" id="user_id" value="{{ $absence->user_id }}">
                                                     </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
@@ -98,6 +99,7 @@
                                                     <div class="form-group">
                                                         <label for="description">Nội dung</label>
                                                         <input type="text" id="description" class="form-control" name="description" >
+                                                        <input type="hidden" class="form-control" name="user_id" id="user_id" value="{{ $absence->user_id }}">
                                                     </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>

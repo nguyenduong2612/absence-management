@@ -104,7 +104,8 @@ class AbsencesController extends Controller
     public function accept(Request $request, Absence $absence)
     {
         $request->validate([
-            'description' => 'nullable',
+            'user_id' => 'required',
+            'description' => 'nullable'
         ]);
         if ($request->description == NULL) $request->description = '';
 
@@ -114,6 +115,7 @@ class AbsencesController extends Controller
         $data['title'] = 'Cập nhật trạng thái';
         $data['content'] = 'Đơn xin nghỉ của bạn đã được chấp nhận.';
         $data['description'] = $request->description;
+        $data['user_id'] = $request->user_id;
 
         $options = array(
             'cluster' => 'ap1',
@@ -136,7 +138,8 @@ class AbsencesController extends Controller
     public function reject(Request $request, Absence $absence)
     {
         $request->validate([
-            'description' => 'nullable',
+            'user_id' => 'required',
+            'description' => 'nullable'
         ]);
         if ($request->description == NULL) $request->description = '';
 
@@ -146,6 +149,7 @@ class AbsencesController extends Controller
         $data['title'] = 'Cập nhật trạng thái';
         $data['content'] = 'Đơn xin nghỉ của bạn đã bị từ chối.';
         $data['description'] = $request->description;
+        $data['user_id'] = $request->user_id;
 
         $options = array(
             'cluster' => 'ap1',

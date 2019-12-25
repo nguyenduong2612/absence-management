@@ -146,9 +146,13 @@
                     </div>
                 </div>
                 `;
-
-                notifications.html(newNotificationHtml);
-                button.click();
+                
+                var current_user = {!! json_encode((array)auth()->user()->id) !!};
+                if (current_user == data.user_id) {
+                    notifications.html(newNotificationHtml);
+                    button.click();
+                }
+                
             });
 
             function handle() {
