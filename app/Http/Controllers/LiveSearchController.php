@@ -13,7 +13,9 @@ class LiveSearchController extends Controller
     {
         if ($request->ajax()) {
             $output = '';
-            $absences = DB::table('absences')->where('reason', 'LIKE', '%' . $request->search . '%')->get();
+            $absences = DB::table('absences')
+                            ->join('users', 'absences.user_id', '=', 'users.id')
+                            ->where('users.name', 'LIKE', '%' . $request->search . '%')->get();
             if ($absences) {
                 foreach ($absences as $key => $absence) {
                     if ($absence->status == 'pending') {
