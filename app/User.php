@@ -47,4 +47,8 @@ class User extends Authenticatable
         return $this->role === 'user';
     }
 
+    public function absences()
+    {
+        return $this->hasMany('App\Absence');
+    }
 }

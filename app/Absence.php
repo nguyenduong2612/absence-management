@@ -24,4 +24,9 @@ class Absence extends Model
     {
         return $this->status === 'rejected';
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

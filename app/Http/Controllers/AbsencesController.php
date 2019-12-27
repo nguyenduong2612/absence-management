@@ -18,7 +18,7 @@ class AbsencesController extends Controller
     {
         $absences = Absence::orderBy('created_at', 'desc')->paginate(10);
 
-        return view('absences.index')->with('absences', $absences);
+        return view('search.search')->with('absences', $absences);
     }
 
     /**
@@ -64,7 +64,7 @@ class AbsencesController extends Controller
      */
     public function show(Absence $absence)
     {
-        //
+        return view('absences.show')->with('absence', $absence);
     }
 
     /**
@@ -132,7 +132,7 @@ class AbsencesController extends Controller
         $pusher->trigger('Notify', 'send-message', $data);
 
         session()->flash('success', 'Đã chấp nhận đơn xin nghỉ.');
-        return redirect(route('absences.index'));
+        return redirect()->back();
     }
 
     public function reject(Request $request, Absence $absence)
@@ -166,7 +166,7 @@ class AbsencesController extends Controller
         $pusher->trigger('Notify', 'send-message', $data);
 
         session()->flash('success', 'Đã từ chối đơn xin nghỉ.');
-        return redirect(route('absences.index'));
+        return redirect()->back();
     }
 
     public function undo(Absence $absence)
@@ -174,7 +174,7 @@ class AbsencesController extends Controller
         $absence->status = 'pending';
         $absence->save();
         session()->flash('success', 'Hoàn tác thành công.');
-        return redirect(route('absences.index'));
+        return redirect()->back();
     }
 
     public function calender()

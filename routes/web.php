@@ -34,5 +34,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('absences/{absence}/undo', 'AbsencesController@undo')->name('absences.undo');
     Route::post('users/{user}/make-admin', 'UsersController@makeAdmin')->name('users.make-admin');
     Route::post('users/{user}/remove-admin', 'UsersController@removeAdmin')->name('users.remove-admin');
+    Route::get('absences/{absence}', 'AbsencesController@show')->name('absences.show');
     Route::get('/calender', 'AbsencesController@calender')->name('calender');
+    Route::get('/search', 'LiveSearchController@search');
 });
