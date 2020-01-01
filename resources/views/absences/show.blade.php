@@ -17,7 +17,7 @@
         </div>
 
         <div class="form-group">
-            <h5>Thời gian:&nbsp;&nbsp; Từ {{ Carbon\Carbon::parse($absence->start_at)->format('d/m/Y') }} Đến {{ Carbon\Carbon::parse($absence->end_at)->format('d/m/Y') }}</h5>
+            <h5>Thời gian:&nbsp;&nbsp; Từ {{ Carbon\Carbon::parse($absence->start_at)->format('H:i d/m/Y') }} Đến {{ Carbon\Carbon::parse($absence->end_at)->format('H:i d/m/Y') }}</h5>
         </div>
         
         <div class="form-group">

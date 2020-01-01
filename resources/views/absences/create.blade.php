@@ -48,10 +48,10 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         flatpickr('#start_at', {
-            enableTime: false
+            enableTime: true
         });
         flatpickr('#end_at', {
-            enableTime: false
+            enableTime: true
         });
     </script>
 @endsection

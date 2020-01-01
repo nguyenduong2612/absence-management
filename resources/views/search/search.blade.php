@@ -80,7 +80,7 @@
                             {{ $absence->reason }}
                         </td>
                         <td>
-                            Từ {{ Carbon\Carbon::parse($absence->start_at)->format('d/m/Y') }} <br> Đến {{ Carbon\Carbon::parse($absence->end_at)->format('d/m/Y') }}
+                            Từ {{ Carbon\Carbon::parse($absence->start_at)->format('H:i d/m/Y') }} <br> Đến {{ Carbon\Carbon::parse($absence->end_at)->format('H:i d/m/Y') }}
                         </td>
                         <td>
                             {{ Carbon\Carbon::parse($absence->created_at)->setTimezone('Asia/Ho_Chi_Minh')->format('H:i:s d/m/Y') }}
@@ -110,7 +110,7 @@
                                 {{ $absence->reason }}
                             </td>
                             <td>
-                                Từ {{ Carbon\Carbon::parse($absence->start_at)->format('d/m/Y') }} <br> Đến {{ Carbon\Carbon::parse($absence->end_at)->format('d/m/Y') }}
+                                Từ {{ Carbon\Carbon::parse($absence->start_at)->format('H:i d/m/Y') }} <br> Đến {{ Carbon\Carbon::parse($absence->end_at)->format('H:i d/m/Y') }}
                             </td>
                             <td>
                                 {{ Carbon\Carbon::parse($absence->created_at)->setTimezone('Asia/Ho_Chi_Minh')->format('H:i:s d/m/Y') }}
