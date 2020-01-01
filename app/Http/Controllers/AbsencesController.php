@@ -17,7 +17,8 @@ class AbsencesController extends Controller
     public function index(Request $request)
     {
         $absences = (new Absence)->newQuery();
-        $absences->join('users', 'absences.user_id', '=', 'users.id');
+        $absences->join('users', 'absences.user_id', '=', 'users.id')
+                 ->select('*', 'absences.id as absence_id');
 
         if ($request->has('status')) {
             if ($request->status == "all") {

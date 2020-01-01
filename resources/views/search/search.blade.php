@@ -103,7 +103,7 @@
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('absences.show', $absence->id) }}" class="btn btn-info btn-sm">Xem chi tiết</a>
+                            <a href="{{ route('absences.show', $absence->absence_id) }}" class="btn btn-info btn-sm">Xem chi tiết</a>
                         </td>
                     </tr>
                     @endforeach
