@@ -13,6 +13,10 @@
         </div>
 
         <div class="form-group">
+            <h5>Phòng ban:&nbsp;&nbsp; {{ $absence->user->department->name }}</h5>
+        </div>
+
+        <div class="form-group">
             <h5>Lý do xin nghỉ phép:&nbsp;&nbsp; {{ $absence->reason }}</h5>
         </div>
 

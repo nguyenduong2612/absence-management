@@ -15,9 +15,22 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('users.index')->with('users', User::all());
+        if ($request->has('department')) {
+            if ($request->department == "all") {
+                $users = (new User)->newQuery();
+            }
+            else {
+                $users = (new User)->newQuery();
+                $users->where('department_id', $request->department);
+            }
+        } 
+        else {
+            $users = (new User)->newQuery();
+        }
+
+        return view('users.index')->with('users', $users->paginate(8));
     }
 
     /**

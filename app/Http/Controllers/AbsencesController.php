@@ -17,20 +17,27 @@ class AbsencesController extends Controller
     public function index(Request $request)
     {
         $absences = (new Absence)->newQuery();
+        $absences->join('users', 'absences.user_id', '=', 'users.id');
 
-        if ($request->has('filter')) {
-            if ($request->filter == "all") {
-                $absences->orderBy('created_at', 'desc');
+        if ($request->has('status')) {
+            if ($request->status == "all") {
+                $absences;
             }
             else {
-                $absences->where('status', $request->filter)->orderBy('created_at', 'desc');
+                $absences->where('absences.status', $request->status);
             }
         } 
-        else {
-            $absences->orderBy('created_at', 'desc');
-        }
 
-        return view('search.search')->with('absences', $absences->paginate(8));
+        if ($request->has('department')) {
+            if ($request->department == "all") {
+                $absences;
+            }
+            else {
+                $absences->where('users.department_id', $request->department);
+            }
+        } 
+        
+        return view('search.search')->with('absences', $absences->orderBy('absences.created_at', 'desc')->paginate(8));
     }
 
     /**

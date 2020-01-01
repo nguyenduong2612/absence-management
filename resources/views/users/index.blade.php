@@ -4,11 +4,33 @@
 <div class="card card-default">
     <div class="card-header"><h2 class="mt-2">Tất cả nhân viên</h2></div>
 
+    <div class="row p-3 m-0">
+        <div class="col-md-6">
+            <h5>Bộ lọc</h5>
+            <form action="{{ route('users.index') }}" method="GET" enctype="multipart/form-data">
+                <div class="input-group">
+                    <select class="custom-select" name="department" id="department">
+                        <option value="all">Tất cả</option>
+                        @foreach(\App\Department::all() as $department)
+                            <option value="{{ $department->id }}">
+                                {{ $department->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-info">Xem</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="card-body">
         @if($users->count() > 0)
         <table class="table">
             <thead>
                 <th>Chức vụ</th>
+                <th>Phòng ban</th>
                 <th>Họ tên</th>
                 <th>Địa chỉ Email</th>
                 <th></th>
@@ -23,6 +45,9 @@
                             @else
                                 Nhân viên
                             @endif
+                        </td>
+                        <td>
+                            {{ $user->department->name }}
                         </td>
                         <td>
                             {{ $user->name }}

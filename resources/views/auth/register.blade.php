@@ -26,6 +26,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="department" class="col-md-4 col-form-label text-md-right">{{ __('Phòng ban') }}</label>
+
+                            <div class="col-md-6">
+                                <select name="department" id="department" class="form-control">
+                                    @foreach(\App\Department::all() as $department)
+                                        <option value="{{ $department->id }}">
+                                            {{ $department->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Địa chỉ E-Mail') }}</label>
 
                             <div class="col-md-6">

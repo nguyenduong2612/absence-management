@@ -22,11 +22,19 @@
             <h5>Bộ lọc</h5>
             <form action="{{ route('absences.index') }}" method="GET" enctype="multipart/form-data">
                 <div class="input-group">
-                    <select class="custom-select" name="filter" id="filter">
+                    <select class="custom-select" name="status" id="status">
                         <option value="all">Tất cả</option>
                         <option value="accepted">Đã duyệt</option>
                         <option value="rejected">Từ chối</option>
                         <option value="pending">Đang chờ</option>
+                    </select>
+                    <select class="custom-select" name="department" id="department">
+                        <option value="all">Tất cả</option>
+                        @foreach(\App\Department::all() as $department)
+                            <option value="{{ $department->id }}">
+                                {{ $department->name }}
+                            </option>
+                        @endforeach
                     </select>
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-info">Xem</button>
@@ -41,7 +49,7 @@
             <h5>Bộ lọc</h5>
             <form action="{{ route('absences.index') }}" method="GET" enctype="multipart/form-data">
                 <div class="input-group">
-                    <select class="custom-select" name="filter" id="filter">
+                    <select class="custom-select" name="status" id="status">
                         <option value="all">Tất cả</option>
                         <option value="accepted">Đã duyệt</option>
                         <option value="rejected">Từ chối</option>

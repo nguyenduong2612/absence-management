@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'provider', 'provider_id'
+        'name', 'email', 'password', 'provider', 'provider_id', 'department_id'
     ];
 
     /**
@@ -50,5 +50,10 @@ class User extends Authenticatable
     public function absences()
     {
         return $this->hasMany('App\Absence');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo('App\Department');
     }
 }
