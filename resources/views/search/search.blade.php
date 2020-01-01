@@ -18,9 +18,44 @@
             <h5>Tìm kiếm</h5>
             <input type="text" class="form-control" id="search" name="search">
         </div>
-        
+        <div class="col-md-6">
+            <h5>Bộ lọc</h5>
+            <form action="{{ route('absences.index') }}" method="GET" enctype="multipart/form-data">
+                <div class="input-group">
+                    <select class="custom-select" name="filter" id="filter">
+                        <option value="all">Tất cả</option>
+                        <option value="accepted">Đã duyệt</option>
+                        <option value="rejected">Từ chối</option>
+                        <option value="pending">Đang chờ</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-info">Xem</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    @else
+    <div class="row p-3 m-0">
+        <div class="col-md-6">
+            <h5>Bộ lọc</h5>
+            <form action="{{ route('absences.index') }}" method="GET" enctype="multipart/form-data">
+                <div class="input-group">
+                    <select class="custom-select" name="filter" id="filter">
+                        <option value="all">Tất cả</option>
+                        <option value="accepted">Đã duyệt</option>
+                        <option value="rejected">Từ chối</option>
+                        <option value="pending">Đang chờ</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-info">Xem</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
     @endif
+
     
     <div class="card-body">
         <table class="table">

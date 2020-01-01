@@ -14,11 +14,23 @@ class AbsencesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $absences = Absence::orderBy('created_at', 'desc')->paginate(10);
+        $absences = (new Absence)->newQuery();
 
-        return view('search.search')->with('absences', $absences);
+        if ($request->has('filter')) {
+            if ($request->filter == "all") {
+                $absences->orderBy('created_at', 'desc');
+            }
+            else {
+                $absences->where('status', $request->filter)->orderBy('created_at', 'desc');
+            }
+        } 
+        else {
+            $absences->orderBy('created_at', 'desc');
+        }
+
+        return view('search.search')->with('absences', $absences->paginate(8));
     }
 
     /**
